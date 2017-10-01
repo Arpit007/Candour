@@ -3,11 +3,11 @@
  */
 const _ = require('lodash');
 
-const User = dB.User;
-const AuthClient = dB.AuthClient;
-const AccessToken = dB.AccessToken;
-const AuthCode = dB.AuthCode;
-const RefreshToken = dB.RefreshToken;
+const User = model.User;
+const AuthClient = model.AuthClient;
+const AccessToken = model.AccessToken;
+const AuthCode = model.AuthCode;
+const RefreshToken = model.RefreshToken;
 
 function getAccessToken(bearerToken) {
     return AccessToken

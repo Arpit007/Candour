@@ -4,11 +4,10 @@
 const oauthServer = require('oauth2-server');
 const Request = oauthServer.Request;
 const Response = oauthServer.Response;
-const oauth = require('./oauth');
 
 module.exports = function (options) {
-    let options = options || {};
-    return function (req, res, next) {
+    options = options || {};
+    return (req, res, next) => {
         let request = new Request({
             headers : { authorization : req.headers.authorization },
             method : req.method,
@@ -17,12 +16,11 @@ module.exports = function (options) {
         });
         let response = new Response(res);
         
-        oauth.authenticate(request, response, options)
+        authServer.authenticate(request, response, options)
             .then(function (token) {
                 req.user = token;
                 next()
-            })
-            .catch(function (err) {
+            }).catch(function (err) {
                 res.status(err.code || 500).json(err)
             });
     }

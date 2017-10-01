@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const compression = require('compression');
 const helmet = require('helmet');
 
-const authenticate = require('./src/authenticate');
+const authenticate = require('./routes/authenticate');
 const index = require('./routes/index');
 const users = require('./routes/users');
 
@@ -25,7 +25,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(require('./src/index'));
 app.use('/', index);
 app.use('/users', users);
 

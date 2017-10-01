@@ -1,15 +1,15 @@
 /**
  * Created by Home Laptop on 01-Oct-17.
  */
-const config = require('../../config/config');
 const mongoose = require('mongoose');
+const oauthServer = require('oauth2-server');
 
-mongoose.connect(config[ 'dB' ][ 'config' ][ 'url' ], function (err) {
+mongoose.connect(global.config[ 'dB' ][ 'config' ][ 'url' ], function (err) {
     if (err)return console.log(err);
     console.log('MongoDB Successfully Connected');
 });
 
-const dB = {
+const model = {
     AccessToken : require('./model/AccessToken'),
     AuthCode : require('./model/AuthCode'),
     AuthClient : require('./model/AuthClient'),
@@ -19,7 +19,6 @@ const dB = {
     Thing : require('./model/Thing')
 };
 
-global.dB = dB;
-dB.methods = require('./model/controller');
+global.model = model;
 
-module.exports = dB;
+module.exports = new oauthServer({ model : require('./model/controller') });

@@ -12,7 +12,6 @@ const dbDictionary = {
 };
 
 global.config = config;
-
-require(dbDictionary[ config.dB.name ]);
+global.authServer = require(dbDictionary[ config.dB.name ]);
 
 module.exports = config;
