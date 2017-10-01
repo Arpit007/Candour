@@ -1,0 +1,13 @@
+{
+  "appName": "Candour",
+  "port": 8080,
+  "dbConfig": {
+    "name": "mongoDB",
+    "mongoDB": {
+      "url": "mongodb://localhost:27017/Candour"
+    },
+    "sql": {
+      "url": ""
+    }
+  }
+}

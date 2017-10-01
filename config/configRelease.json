@@ -1,0 +1,15 @@
+{
+  "appName": "Candour",
+  "port": 8080,
+  "dbConfig": {
+    "name": "mongoDB",
+    "mongoDB": {
+      "env": "MONGODB_URI",
+      "url": "mongodb://localhost:27017/Candour"
+    },
+    "sql": {
+      "env": "",
+      "url": ""
+    }
+  }
+}
