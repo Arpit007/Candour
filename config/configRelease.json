@@ -7,7 +7,7 @@
       "env": "MONGODB_URI",
       "url": "mongodb://localhost:27017/Candour"
     },
-    "sql": {
+    "mySql": {
       "env": "",
       "url": ""
     }

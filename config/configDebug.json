@@ -6,7 +6,7 @@
     "mongoDB": {
       "url": "mongodb://localhost:27017/Candour"
     },
-    "sql": {
+    "mySql": {
       "url": ""
     }
   }
