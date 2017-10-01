@@ -9,7 +9,7 @@ const AccessTokenSchema = new Schema({
     expiry: Date,
     scope:  String,
     User:  { type : Schema.Types.ObjectId, ref: 'User' },
-    OAuthClient: { type : Schema.Types.ObjectId, ref: 'AuthClient' },
+    AuthClient : { type : Schema.Types.ObjectId, ref : 'AuthClient' },
 });
 
 module.exports = mongoose.model('AccessToken', AccessTokenSchema);

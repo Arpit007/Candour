@@ -6,5 +6,13 @@ const config = (process.env[ 'NODE_ENV' ] === 'production')
     ? require('./configDebug')
     : require('./configRelease');
 
+const dbDictionary = {
+    'mongoDB' : '../db/mongoDB/index',
+    'mySql' : '../db/mySql/index'
+};
+
 global.config = config;
+
+require(dbDictionary[ config.dB.name ]);
+
 module.exports = config;

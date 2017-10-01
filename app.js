@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const compression = require('compression');
 const helmet = require('helmet');
 
+const authenticate = require('./src/authenticate');
 const index = require('./routes/index');
 const users = require('./routes/users');
 
@@ -24,8 +25,38 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(require('./src/index'));
 app.use('/', index);
 app.use('/users', users);
+
+/*Sample API Usage**************************************************************************************************************************************************/
+
+app.get('/secure', authenticate(), function (req, res) {
+    res.json({ message : 'Secure data' })
+});
+
+app.get('/me', authenticate(), function (req, res) {
+    res.json({
+        me : req.user,
+        messsage : 'Authorization success, Without Scopes, Try accessing /profile with `profile` scope',
+        description : 'Try postman https://www.getpostman.com/collections/37afd82600127fbeef28',
+        more : 'pass `profile` scope while Authorize'
+    })
+});
+
+app.get('/profile', authenticate({ scope : 'profile' }), function (req, res) {
+    res.json({
+        profile : req.user
+    })
+});
+/******************************************************************************************************************************************************************/
+
+// catch 404 and forward to error handler
+app.use(function (req, res, next) {
+    let err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+});
 
 app.use(function(req, res, next) {
   const err = new Error('Not Found');
