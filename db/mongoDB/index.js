@@ -2,7 +2,7 @@
  * Created by Home Laptop on 01-Oct-17.
  */
 const mongoose = require('mongoose');
-const oauthServer = require('oauth2-server');
+mongoose.Promise = require('bluebird');
 
 mongoose.connect(global.config[ 'dB' ][ 'config' ][ 'url' ], function (err) {
     if (err)return console.log(err);
@@ -20,5 +20,4 @@ const model = {
 };
 
 global.model = model;
-
-module.exports = new oauthServer({ model : require('./model/controller') });
+module.exports = require('./model/controller');

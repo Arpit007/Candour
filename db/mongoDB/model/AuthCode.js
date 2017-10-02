@@ -5,11 +5,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const AuthCodeSchema = new Schema({
-    authCode : String,
-    expiry: Date,
-    redirectUri:  String,
-    scope:  String,
-    User:  { type : Schema.Types.ObjectId, ref: 'User' },
+    authCode : { type : String, required : true, unique : true },
+    expiry : Date,
+    scope : String,
+    User : { type : Schema.Types.ObjectId, ref : 'User' },
     AuthClient : { type : Schema.Types.ObjectId, ref : 'AuthClient' },
 });
 

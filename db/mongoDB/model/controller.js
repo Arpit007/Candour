@@ -19,6 +19,7 @@ function getAccessToken(bearerToken) {
             let token = accessToken;
             token.user = token.User;
             token.client = token.AuthClient;
+            token.accessTokenExpiresAt = token.expiry;
             return token;
         })
         .catch((err) => {
@@ -35,6 +36,7 @@ function getClient(clientId, clientSecret) {
         .then((client) => {
             if (!client) return new Error("client not found");
             let clientWithGrants = client;
+            //Todo: Remove these Grants
             clientWithGrants.grants = [ 'authorization_code', 'password', 'refresh_token', 'client_credentials' ];
             // Todo: need to create another table for redirect URIs
             clientWithGrants.redirectUris = [ clientWithGrants.redirectUri ];
@@ -142,7 +144,7 @@ function saveAuthorizationCode(code, client, user) {
         .create({
             expiry : code.expiresAt,
             AuthClient : client._id,
-            authCode : code.AuthCode,
+            authCode : code.authorizationCode,
             User : user._id,
             scope : code.scope
         }).then(() => {
