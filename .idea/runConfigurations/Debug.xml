@@ -4,6 +4,7 @@
       <env name="DEBUG" value="Candour:*" />
       <env name="NODE_ENV" value="development" />
       <env name="MONGODB_URI" value="hello_world" />
+      <env name="BLUEBIRD_WARNINGS" value="0" />
     </envs>
     <EXTENSION ID="com.jetbrains.nodejs.run.NodeJSStartBrowserRunConfigurationExtension">
       <browser url="http://localhost:3000/" />

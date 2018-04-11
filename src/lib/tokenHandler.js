@@ -65,7 +65,7 @@ class TokenHandler {
             throw new error.InvalidRequestError('Invalid parameter: `client_secret`');
         
         return this.model.getClient(credentials.clientId, credentials.clientSecret)
-            .then(function (client) {
+            .then((client) => {
                 if (!client)
                     throw new error.InvalidClientError('Invalid client: client is invalid');
                 if (!client.grants)
@@ -75,7 +75,7 @@ class TokenHandler {
                 
                 return client;
             })
-            .catch(function (e) {
+            .catch((e) => {
                 if ((e instanceof error.InvalidClientError) && request.get('authorization')) {
                     response.set('WWW-Authenticate', 'Basic realm="Service"');
                     throw new error.InvalidClientError(e, { code : 401 });

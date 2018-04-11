@@ -6,7 +6,7 @@ global.Response = module.exports.Response = (code = 200, body = {}, msg = '') =>
     let reply = {
         head : {
             code : code,
-            msg : msg
+            msg : msg || (code === 200 ? 'ok' : '')
         },
         body : {}
     };
@@ -20,7 +20,7 @@ global.ResponseReply = module.exports.ResponseReply = (res, code = 200, body = {
     let reply = {
         head : {
             code : code,
-            msg : msg
+            msg : msg || (code === 200 ? 'ok' : '')
         },
         body : {}
     };

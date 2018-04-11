@@ -2,7 +2,7 @@
  * Created by StarkX on 09-Apr-18.
  */
 const model = require('../model/model');
-const config = require('../../config/config');
+require('../../config/config');
 
 model.AuthScope.find({}).remove()
     .then(() => {
@@ -24,7 +24,7 @@ model.User.find({}).remove()
             profile : {
                 name : 'Arpit Bhatnagar'
             }
-        }).then((user) => {
+        }).then(() => {
             console.log('finished populating users');
             return model.AuthClient.find({}).remove()
                 .then(() => {

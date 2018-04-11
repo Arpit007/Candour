@@ -34,7 +34,7 @@ class Server {
     authorize(request, response, options, callback) {
         options = Object.assign({
             allowEmptyState : false,
-            authorizationCodeLifetime : 5 * 60   // 5 minutes.
+            authorizationCodeLifetime : xConfig.auth.authorizationCodeLifetime
         }, this.options, options);
         
         return new AuthorizeHandler(options)
@@ -44,8 +44,8 @@ class Server {
     
     token(request, response, options, callback) {
         options = Object.assign({
-            accessTokenLifetime : 60 * 60,             // 1 hour.
-            refreshTokenLifetime : 60 * 60 * 24 * 14,  // 2 weeks.
+            accessTokenLifetime : xConfig.auth.accessTokenLifetime,
+            refreshTokenLifetime : xConfig.auth.refreshTokenLifetime,
             allowExtendedTokenAttributes : false,
             requireClientAuthentication : {}           // defaults to true for all grant types
         }, this.options, options);

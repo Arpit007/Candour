@@ -1,8 +1,9 @@
 /**
  * Created by StarkX on 08-Apr-18.
  */
-class DefaultError {
+class DefaultError extends Error {
     constructor(reason) {
+        super();
         this.head = { code : 500, msg : "" };
         this.body = { reason : reason };
     }
@@ -11,7 +12,7 @@ class DefaultError {
 class InvalidArgumentError extends DefaultError {
     constructor(reason) {
         super(reason);
-        this.head.msg = "Invalid Arguement";
+        this.head.msg = "invalid_argument";
     }
 }
 
@@ -19,7 +20,7 @@ class InsufficientScopeError extends DefaultError {
     constructor(reason) {
         super(reason);
         this.head.code = 403;
-        this.head.msg = "Insufficient Scope";
+        this.head.msg = "insufficient_scope";
     }
 }
 
@@ -27,7 +28,7 @@ class AccessDeniedError extends DefaultError {
     constructor(reason) {
         super(reason);
         this.head.code = 400;
-        this.head.msg = "Access Denied";
+        this.head.msg = "access_denied";
     }
 }
 
@@ -35,7 +36,7 @@ class InvalidClientError extends DefaultError {
     constructor(reason) {
         super(reason);
         this.head.code = 400;
-        this.head.msg = "Invalid Client";
+        this.head.msg = "invalid_client";
     }
 }
 
@@ -43,7 +44,7 @@ class InvalidGrantError extends DefaultError {
     constructor(reason) {
         super(reason);
         this.head.code = 400;
-        this.head.msg = "Invalid Grant";
+        this.head.msg = "invalid_grant";
     }
 }
 
@@ -51,7 +52,7 @@ class InvalidRequestError extends DefaultError {
     constructor(reason) {
         super(reason);
         this.head.code = 400;
-        this.head.msg = "Invalid Request";
+        this.head.msg = "invalid_request";
     }
 }
 
@@ -59,7 +60,7 @@ class InvalidScopeError extends DefaultError {
     constructor(reason) {
         super(reason);
         this.head.code = 400;
-        this.head.msg = "Invalid Scope";
+        this.head.msg = "invalid_scope";
     }
 }
 
@@ -67,7 +68,7 @@ class InvalidTokenError extends DefaultError {
     constructor(reason) {
         super(reason);
         this.head.code = 401;
-        this.head.msg = "Invalid Token";
+        this.head.msg = "invalid_token";
     }
 }
 
@@ -75,7 +76,7 @@ class UnsupportedResponseTypeError extends DefaultError {
     constructor(reason) {
         super(reason);
         this.head.code = 400;
-        this.head.msg = "Unsupported Response Type";
+        this.head.msg = "unsupported_response_type";
     }
 }
 
@@ -83,7 +84,7 @@ class UnsupportedGrantTypeError extends DefaultError {
     constructor(reason) {
         super(reason);
         this.head.code = 400;
-        this.head.msg = "Unsupported Grant Type";
+        this.head.msg = "unsupported_grant_type";
     }
 }
 
@@ -91,7 +92,7 @@ class UnauthorizedRequestError extends DefaultError {
     constructor(reason) {
         super(reason);
         this.head.code = 401;
-        this.head.msg = "Unsupported Request";
+        this.head.msg = "unsupported_request";
     }
 }
 
@@ -99,7 +100,7 @@ class UnauthorizedClientError extends DefaultError {
     constructor(reason) {
         super(reason);
         this.head.code = 400;
-        this.head.msg = "Unsupported Client";
+        this.head.msg = "unsupported_client";
     }
 }
 
@@ -107,7 +108,7 @@ class ServerError extends DefaultError {
     constructor(reason) {
         super(reason);
         this.head.code = 503;
-        this.head.msg = "Server Error";
+        this.head.msg = "server_error";
     }
 }
 

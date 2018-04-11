@@ -88,7 +88,7 @@ class AuthorizeHandler {
             throw new error.InvalidRequestError('Invalid request: `redirect_uri` is not a valid URI');
         
         return this.model.getClient(clientId, null)
-            .then(function (client) {
+            .then((client) => {
                 if (!client)
                     throw new error.InvalidClientError('Invalid client: client credentials are invalid');
                 if (!client.grants)

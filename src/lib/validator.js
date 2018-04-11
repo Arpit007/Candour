@@ -25,8 +25,8 @@ module.exports = {
      *
      * @see https://tools.ietf.org/html/rfc6749#appendix-A
      */
-    
-    nchar : function (value) {
+
+    nchar : (value) => {
         return rules.NCHAR.test(value);
     },
     
@@ -35,8 +35,8 @@ module.exports = {
      *
      * @see https://tools.ietf.org/html/rfc6749#appendix-A
      */
-    
-    nqchar : function (value) {
+
+    nqchar : (value) => {
         return rules.NQCHAR.test(value);
     },
     
@@ -45,8 +45,8 @@ module.exports = {
      *
      * @see https://tools.ietf.org/html/rfc6749#appendix-A
      */
-    
-    nqschar : function (value) {
+
+    nqschar : (value) => {
         return rules.NQSCHAR.test(value);
     },
     
@@ -56,8 +56,8 @@ module.exports = {
      *
      * @see https://tools.ietf.org/html/rfc6749#appendix-A
      */
-    
-    uchar : function (value) {
+
+    uchar : (value) => {
         return rules.UNICODECHARNOCRLF.test(value);
     },
     
@@ -66,7 +66,7 @@ module.exports = {
      *
      * @see http://tools.ietf.org/html/rfc3986#section-3
      */
-    uri : function (value) {
+    uri : (value) => {
         return rules.URI.test(value);
     },
     
@@ -75,8 +75,8 @@ module.exports = {
      *
      * @see https://tools.ietf.org/html/rfc6749#appendix-A
      */
-    
-    vschar : function (value) {
+
+    vschar : (value) => {
         return rules.VSCHAR.test(value);
     }
 };

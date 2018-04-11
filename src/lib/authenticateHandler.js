@@ -31,7 +31,7 @@ class AuthenticateHandler {
                     return this.verifyScope(token);
             })
             .tap((token) => this.updateResponse(response, token))
-            .catch(function (e) {
+            .catch((e) => {
                 if (e instanceof error.UnauthorizedRequestError)
                     response.set('WWW-Authenticate', 'Bearer realm="Service"');
                 

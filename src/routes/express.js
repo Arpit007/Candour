@@ -1,48 +1,37 @@
 /**
  * Created by StarkX on 09-Apr-18.
  */
-const Request = require('../lib/request');
-const Response = require('../lib/response');
-const oauth = require('../lib/oauth');
-const model = require('../model/model');
+const express = require('express');
+const router = express.Router();
 
-module.exports = (app) => {
-    app.all('/oauth/token', function (req, res, next) {
-        let request = new Request(req);
-        let response = new Response(res);
-        
-        oauth.token(request, response)
-            .then((token) => {
-                // Todo: remove unnecessary values in response
-                return res.json(token)
-            }).catch((err) => {
-            return res.status(500).json(err)
-        })
-    });
-    
-    app.post('/authorise', function (req, res) {
-        let request = new Request(req);
-        let response = new Response(res);
-        
-        return oauth.authorize(request, response)
-            .then((success) => {
-                //  if (req.body.allow !== 'true') return callback(null, false);
-                //  return callback(null, true, req.user);
-                res.json(success)
-            }).catch((err) => {
-                res.status(err.code || 500).json(err)
-            })
-    });
-    
-    app.get('/authorise', (req, res) => {
-        return model.AuthClient.findOne({
-            clientId : req.query.client_id,
-            redirectUri : req.query.redirect_uri,
-        }).select("id name").then((model) => {
-            if (!model) return res.status(404).json({ error : 'Invalid Client' });
-            return res.json(model);
-        }).catch((err) => {
-            return res.status(err.code || 500).json(err)
-        });
-    });
+const authServer = require('../lib/express');
+const model = require('../model/model');
+const response = require('../response');
+
+const error = (err, req, res, next) => {
+    if (err) {
+        return res.status(err.head.code).json(err);
+    }
+    next();
 };
+
+router.all('/oauth/token', authServer.token(), error);
+
+router.post('/authorise', authServer.authorize(), error);
+
+router.get('/client', (req, res) => {
+    return model.AuthClient
+        .findOne({
+            clientId : req.query[ 'client_id' ],
+            redirectUri : req.query[ 'redirect_uri' ],
+        })
+        .select("clientId name")
+        .then((model) => {
+            if (!model) return res.status(404).json(response.Response(404, 'Invalid Client'));
+            return response.ResponseReply(res, 200, model);
+        }).catch((err) => {
+            return res.status(err.code || 500).json(response.Response(err.code || 500, err))
+        });
+});
+
+module.exports = router;

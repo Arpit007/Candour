@@ -10,7 +10,7 @@ const AuthCodeSchema = new Schema({
     expires : Date,
     scope : [ { type : String } ],
     User : { type : ObjectId, ref : 'User' },
-    AuthClient : { type : ObjectId, ref : 'AuthClient' },
+    AuthClient : { type : ObjectId, ref : 'AuthClient' }
 });
 
 module.exports = AuthCodeSchema;
