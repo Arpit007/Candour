@@ -1,18 +1,24 @@
 /**
- * Created by Home Laptop on 01-Oct-17.
+ * Created by StarkX on 07-Mar-18.
  */
-const oauthServer = require('oauth2-server');
 
-const config = (process.env[ 'NODE_ENV' ] === 'production')
-    ? require('./configDebug')
-    : require('./configRelease');
+let config = null;
 
-const dbDictionary = {
-    'mongoDB' : '../db/mongoDB/index',
-    'mySql' : '../db/mySql/index'
-};
+if (process.env[ 'NODE_ENV' ] !== "development") {
+    console.log('Production');
+    config = require('./release');
+    config.debugMode = false;
+    config.dbConfig.url = process.env.MONGODB_URI || config.dbConfig.url;
+}
+else {
+    console.log('Debugging');
+    config = require('./debug');
+    config.debugMode = true;
+}
 
-global.config = config;
-global.authServer = new oauthServer({ model : require(dbDictionary[ config.dB.name ]) });
+config.port = process.env.PORT || config.port;
 
+global.xConfig = config;
 module.exports = config;
+
+const db = require('../src/model/db');
